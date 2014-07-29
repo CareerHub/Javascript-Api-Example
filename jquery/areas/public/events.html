@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<h1>CareerHub Javascript Examples</h1>
+	<h2>Public Examples</h2>
+
+	<h3>Events</h3>
+
+	<div class="events-list"><div>
+	<script id="event-list-item-template" type="x-tmpl-mustache">
+		{{#events}}
+		<div class="event-list-item">
+			<h4><a href="/event.html#{{id}}">{{title}}</a></h4>
+			<p>
+				<strong>Venue: </strong> {{venue}}<br />
+				<strong>Dates</strong>
+				<ul>
+					<li>Start: {{start}}</li>
+					<li>End: {{start}}</li>
+				</ul>
+			</p>
+			<h5>Summary</h5>
+			<p>{{summary}}</p>
+			<h5>Details</h5>
+			<p>{{&details}}</p>
+		</div>
+		{{/events}}
+	</script>
+	<script src="../../scripts/libs/jquery-2.1.1.min.js"></script>
+	<script src="../../scripts/libs/mustache.js"></script>
+	<script src="../../scripts/config.js"></script>
+	<script src="../../scripts/oauth.js"></script>
+	<script src="../../scripts/oauth.client-credentials.js"></script>
+	<script src="scripts/public.api.js"></script>
+	<script>
+
+		$(function() {
+			var eventsApi = ch.api.public.events,
+				eventsList = $('.events-list'),
+				template = $('#event-list-item-template').html();
+
+			Mustache.parse(template);
+
+			eventsList.html('Loading Events...');
+
+			eventsApi
+				.list()
+				.done(function(data) {
+					var rendered = Mustache.render(template, { events: data });
+					eventsList.html(rendered);
+				})
+				.fail(function() {
+					eventsList.html('Could not load events!');
+				});
+		});
+	</script>
+</html>
