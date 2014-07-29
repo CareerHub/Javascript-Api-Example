@@ -46,7 +46,7 @@
 			eventsList.html('Loading Events...');
 
 			eventsApi
-				.list()
+				.list() // use options i.e. { filterIds: [1043] }
 				.done(function(data) {
 					var rendered = Mustache.render(template, { events: data });
 					eventsList.html(rendered);

@@ -12,7 +12,8 @@
 			url = apiUrl + resource;
 
 		return getToken.pipe(function(token) {
-			return $.ajax({
+			var options = {
+				crossDomain: true,
 				url: url,
 				type: method,
 				headers: {
@@ -20,7 +21,9 @@
 					'Authorization': 'Bearer ' + token
 				},
 				data: data
-			});
+			};
+
+			return $.ajax(options);
 		});
 	};
 
@@ -30,22 +33,15 @@
 
 	window.ch.api.public = {
 		events: {
-			list: function(take, skip) {
-				return getResource('events', 'GET', {
-					take: take,
-					skip: skip
-				});
+			list: function(options) {
+				return getResource('events', 'GET', options);
 			},
 			search: function(text, take, skip) {
 				if(!text) {
 					throw 'Argument Exception: Text is required';
 				}
 
-				return getResource('events/search', 'GET', {
-					text: text,
-					take: take,
-					skip: skip
-				});
+				return getResource('events/search', 'GET', options);
 			},
 			get: function(id) {
 				return getResource('events/' + id, 'GET');
