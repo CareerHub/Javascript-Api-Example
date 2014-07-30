@@ -11,7 +11,7 @@
 		var getToken = oauth.clientCredentials.getAccessToken(),
 			url = apiUrl + resource;
 
-		return getToken.pipe(function(token) {
+		return getToken.then(function(token) {
 			var options = {
 				crossDomain: true,
 				url: url,
