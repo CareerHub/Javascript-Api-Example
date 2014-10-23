@@ -1,30 +1,28 @@
 
 (function(window, $, config, oauth) {
 
-	var apiUrl = config.baseUrl + '/api/public/v1/';
+	var apiUrl = config.baseUrl + '/api/jobseeker/v1/';
 
 	var getResource = function(resource, method, data) {
 		if(!data) {
 			data = {};
 		}
 
-		var getToken = oauth.clientCredentials.getAccessToken(),
+		var token = oauth.implicit.getAccessToken(),
 			url = apiUrl + resource;
 
-		return getToken.then(function(token) {
-			var options = {
-				crossDomain: true,
-				url: url,
-				type: method,
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Authorization': 'Bearer ' + token
-				},
-				data: data
-			};
+		var options = {
+			crossDomain: true,
+			url: url,
+			type: method,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Authorization': 'Bearer ' + token
+			},
+			data: data
+		};
 
-			return $.ajax(options);
-		});
+		return $.ajax(options);
 	};
 
 	if(!window.ch.api) {
