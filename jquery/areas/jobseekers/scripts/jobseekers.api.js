@@ -31,7 +31,7 @@
 		window.ch.api = {};
 	}
 
-	window.ch.api.public = {
+	window.ch.api.jobseekers = {
 		events: {
 			list: function(options) {
 				return getResource('events', 'GET', options);
