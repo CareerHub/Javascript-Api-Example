@@ -15,7 +15,7 @@
 				grant_type: 'client_credentials',
 				client_id: config.api.identifier,
 				client_secret: config.api.secret,
-				scope: config.api.scopes
+				scope: 'Public.Events'
 			}
 		}).done(function(data, status) {
 			tokenDeferred.resolve(data.access_token);

@@ -52,7 +52,8 @@
 					var rendered = Mustache.render(template, { events: data });
 					eventsList.html(rendered);
 				})
-				.fail(function() {
+				.fail(function(err) {
+					console.error(err);
 					eventsList.html('Could not load events!');
 				});
 		});
