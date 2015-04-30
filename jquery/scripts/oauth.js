@@ -9,10 +9,10 @@
 
 	oauth.helper = {
 		getAuthUrl: function () {
-			return config.baseUrl + '/oauth/auth'
+			return config.baseUrl + '/oauth/auth';
 		},
 		getTokenUrl: function () {
-			return config.baseUrl + '/oauth/token'
+			return config.baseUrl + '/oauth/token';
 		}
 	};
 
