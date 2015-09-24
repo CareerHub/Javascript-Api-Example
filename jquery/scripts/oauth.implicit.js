@@ -25,8 +25,8 @@
 			var link = "{0}?response_type=token&client_id={1}&redirect_uri={2}&scope={3}&state={4}".format(
 				oauth.helper.getAuthUrl(),
 				config.api.identifier,
-				'https://localhost/javascript-api-example/jquery/areas/jobseekers/callback.html',
-				'JobSeeker.Events',
+				'http://localhost/javascript-api-example/jquery/callback.html',
+				encodeURIComponent('Admin.Personal.Details'),
 				window.location.href
 			);
 

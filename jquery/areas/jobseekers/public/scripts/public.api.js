@@ -46,6 +46,15 @@
 			get: function(id) {
 				return getResource('events/' + id, 'GET');
 			}
+		},
+
+		appointments: {
+			list: function(options) {
+				return getResource('appointments', 'GET', options);
+			},
+			get: function(id) {
+				return getResource('appointments/' + id, 'GET');
+			}
 		}
 	};
 

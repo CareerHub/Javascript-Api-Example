@@ -9,7 +9,7 @@
 		}
 
 		var token = oauth.implicit.getAccessToken(),
-			url = apiUrl + resource;
+				url = apiUrl + resource;
 
 		var options = {
 			crossDomain: true,
@@ -39,10 +39,34 @@
 					throw 'Argument Exception: Text is required';
 				}
 
+				var options = {
+					text: text,
+					take: take,
+					skip: skip
+				};
+
 				return getResource('events/search', 'GET', options);
 			},
 			get: function(id) {
 				return getResource('events/' + id, 'GET');
+			}
+		},
+		jobs: {
+			list: function(options) {
+				return getResource('jobs', 'GET', options);
+			},
+			search: function(text, take, skip) {
+				
+				var options = {
+					text: text,
+					take: take,
+					skip: skip
+				};
+				
+				return getResource('jobs/search', 'GET', options);
+			},
+			get: function(id) {
+				return getResource('jobs/' + id, 'GET');
 			}
 		}
 	};

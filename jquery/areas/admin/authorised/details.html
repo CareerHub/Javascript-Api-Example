@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<h1>CareerHub Javascript Examples</h1>
+	<h2>JobSeeker Examples</h2>
+
+	<h3>Details</h3>
+
+	<div class="details"><div>
+	<script id="details-template" type="x-tmpl-mustache">
+		<p>{{firstName}} {{lastName}}</p>
+	</script>
+	<script src="../../../scripts/libs/jquery-2.1.1.min.js"></script>
+	<script src="../../../scripts/libs/mustache.js"></script>
+	<script src="../../../scripts/string.format.js"></script>
+	<script src="../../../scripts/config.js"></script>
+	<script src="../../../scripts/oauth.js"></script>
+	<script src="../../../scripts/oauth.implicit.js"></script>
+	<script src="scripts/admin.api.js"></script>
+	<script>
+
+		$(function() {
+			var detailsApi = ch.api.admin.details,
+				detailsEl = $('.details'),
+				template = $('#details-template').html();
+
+			Mustache.parse(template);
+
+			detailsEl.html('Loading Details...');
+
+			detailsApi
+				.get()
+				.done(function(data) {
+					var rendered = Mustache.render(template, data);
+					detailsEl.html(rendered);
+				})
+				.fail(function(err) {
+					console.error(err);
+					detailsEl.html('Could not load details!');
+				});
+		});
+	</script>
+</html>

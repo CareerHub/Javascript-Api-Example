@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h1>CareerHub Javascript Examples</h1>
-	<h2>JobSeeker Examples</h2>
+	<h2>Public Examples</h2>
 
 	<h3>Events</h3>
 
@@ -28,17 +28,16 @@
 		</div>
 		{{/events}}
 	</script>
-	<script src="../../scripts/libs/jquery-2.1.1.min.js"></script>
-	<script src="../../scripts/libs/mustache.js"></script>
-	<script src="../../scripts/string.format.js"></script>
-	<script src="../../scripts/config.js"></script>
-	<script src="../../scripts/oauth.js"></script>
-	<script src="../../scripts/oauth.implicit.js"></script>
-	<script src="scripts/jobseekers.api.js"></script>
+	<script src="../../../scripts/libs/jquery-2.1.1.min.js"></script>
+	<script src="../../../scripts/libs/mustache.js"></script>
+	<script src="../../../scripts/config.js"></script>
+	<script src="../../../scripts/oauth.js"></script>
+	<script src="../../../scripts/oauth.client-credentials.js"></script>
+	<script src="scripts/public.api.js"></script>
 	<script>
 
 		$(function() {
-			var eventsApi = ch.api.jobseekers.events,
+			var eventsApi = ch.api.public.events,
 				eventsList = $('.events-list'),
 				template = $('#event-list-item-template').html();
 
@@ -47,7 +46,7 @@
 			eventsList.html('Loading Events...');
 
 			eventsApi
-				.list() // use options i.e. { filterIds: [1043] }
+				.list({ filterIds: [2,3], filterOperator: 'OR' }) // use options i.e. { filterIds: [1043] }
 				.done(function(data) {
 					var rendered = Mustache.render(template, { events: data });
 					eventsList.html(rendered);

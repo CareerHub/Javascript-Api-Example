@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<h1>CareerHub Javascript Examples</h1>
+	<h2>Public Examples</h2>
+
+	<h3>Appointments</h3>
+
+	<div class="appointments-list"><div>
+	<script id="appointments-list-item-template" type="x-tmpl-mustache">
+		{{#appointments}}
+		<div class="appointments-list-item">
+			<p>
+				{{#consultant}}
+				<strong>Consultant: </strong> {{consultant.firstName}} {{consultant.lastName}}<br />
+				{{/consultant}}
+				{{#location}}
+				<strong>Location: </strong> {{location.name}}<br />
+				{{/location}}
+				<strong>Dates</strong>
+				<ul>
+					<li>Start: {{start}}</li>
+					<li>End: {{end}}</li>
+				</ul>
+			</p>
+		</div>
+		{{/appointments}}
+	</script>
+	<script src="../../../scripts/libs/jquery-2.1.1.min.js"></script>
+	<script src="../../../scripts/libs/mustache.js"></script>
+	<script src="../../../scripts/config.js"></script>
+	<script src="../../../scripts/oauth.js"></script>
+	<script src="../../../scripts/oauth.client-credentials.js"></script>
+	<script src="scripts/public.api.js"></script>
+	<script>
+
+		$(function() {
+			var appointmentsApi = ch.api.public.appointments,
+					appointmentsList = $('.appointments-list'),
+					template = $('#appointments-list-item-template').html();
+
+			Mustache.parse(template);
+
+			appointmentsList.html('Loading Appointments...');
+
+			appointmentsApi
+				.list({
+					filterIds: [1] 
+				}) // use options i.e. { filterIds: [1043] }
+				.done(function(data) {
+					var rendered = Mustache.render(template, { appointments: data });
+					appointmentsList.html(rendered);
+				})
+				.fail(function(err) {
+					console.error(err);
+					appointmentsList.html('Could not load appointments!');
+				});
+		});
+	</script>
+</html>

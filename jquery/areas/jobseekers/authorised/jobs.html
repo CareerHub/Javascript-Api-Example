@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <h1>CareerHub Javascript Examples</h1>
+  <h2>JobSeeker Examples</h2>
+
+  <h3>Jobs</h3>
+
+  <div class="jobs-list"><div>
+  <script id="jobs-list-item-template" type="x-tmpl-mustache">
+    {{#jobs}}
+    <div class="jobs-list-item">
+      <h4><a href="/jobs.html#{{id}}">{{title}}</a></h4>
+      <h5>Summary</h5>
+      <p>{{summary}}</p>
+      <h5>Details</h5>
+      <p>{{&details}}</p>
+    </div>
+    {{/jobs}}
+  </script>
+  <script src="../../../scripts/libs/jquery-2.1.1.min.js"></script>
+  <script src="../../../scripts/libs/mustache.js"></script>
+  <script src="../../../scripts/string.format.js"></script>
+  <script src="../../../scripts/config.js"></script>
+  <script src="../../../scripts/oauth.js"></script>
+  <script src="../../../scripts/oauth.implicit.js"></script>
+  <script src="scripts/jobseekers.api.js"></script>
+  <script>
+
+    $(function() {
+      var jobsApi = ch.api.jobseekers.jobs,
+        jobsList = $('.jobs-list'),
+        template = $('#jobs-list-item-template').html();
+
+      Mustache.parse(template);
+
+      jobsList.html('Loading Jobs...');
+
+      jobsApi
+        .list() // use options i.e. { filterIds: [1043] }
+        .done(function(data) {
+          var rendered = Mustache.render(template, { jobs: data });
+          jobsList.html(rendered);
+        })
+        .fail(function(err) {
+          console.error(err);
+          jobsList.html('Could not load jobs!');
+        });
+    });
+  </script>
+</html>
