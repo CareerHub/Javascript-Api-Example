@@ -25,8 +25,8 @@
 			var link = "{0}?response_type=token&client_id={1}&redirect_uri={2}&scope={3}&state={4}".format(
 				oauth.helper.getAuthUrl(),
 				config.api.identifier,
-				'http://localhost/javascript-api-example/jquery/callback.html',
-				encodeURIComponent('Admin.Personal.Details'),
+				'http://localhost:5000/jquery/callback.html',
+				encodeURIComponent('JobSeeker.Personal.Details JobSeeker.Events JobSeeker.Jobs JobSeeker.Forms'),
 				window.location.href
 			);
 
@@ -55,7 +55,7 @@
 		},
 
 		parseCallbackQueryString: function() {
-			var params = {}, 
+			var params = {},
 				queryString = location.hash.substring(1),
 			    regex = /([^&=]+)=([^&]*)/g, m;
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+</head>
+<body>
+	<h1>CareerHub Javascript Examples</h1>
+	<h2>JobSeeker Examples</h2>
+
+	<h3>Form Report</h3>
+
+	<div class="form-reports-list"><div>
+	<script id="form-report-list-item-template" type="x-tmpl-mustache">
+		{{#formReports}}
+		<div class="form-report-list-item">
+			<h4><a href="formReports.html">{{displayName}}</a></h4>
+			<p>{{fieldType}} - {{fieldId}}</p>
+			<p>{{value}}</p>
+		</div>
+		{{/formReports}}
+	</script>
+	<script src="../../../scripts/libs/jquery-2.1.1.min.js"></script>
+	<script src="../../../scripts/libs/mustache.js"></script>
+	<script src="../../../scripts/string.format.js"></script>
+	<script src="../../../scripts/config.js"></script>
+	<script src="../../../scripts/oauth.js"></script>
+	<script src="../../../scripts/oauth.implicit.js"></script>
+	<script src="scripts/jobseekers.api.js"></script>
+	<script>
+
+		$(function() {
+			var formReportsApi = ch.api.jobseekers.formReports,
+				formReportsList = $('.form-reports-list'),
+				template = $('#form-report-list-item-template').html();
+
+			Mustache.parse(template);
+
+			formReportsList.html('Loading Form Reports...');
+
+			formReportsApi
+				.get(90027, 1) // use options i.e. { filterIds: [1043] }
+				.done(function(data) {
+					var rendered = Mustache.render(template, { formReports: data });
+					formReportsList.html(rendered);
+				})
+				.fail(function(err) {
+					console.error(err);
+					formReportsList.html('Could not load Form Reports!');
+				});
+		});
+	</script>
+</html>

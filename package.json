@@ -1,0 +1,22 @@
+{
+  "name": "javascript-api-example",
+  "version": "0.0.1",
+  "description": "CareerHub API Example",
+  "main": "index.html",
+  "scripts": {
+    "start": "ws --port 5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CareerHub/Javascript-Api-Example.git"
+  },
+  "author": "CareerHub <help@careerhub.support>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CareerHub/Javascript-Api-Example/issues"
+  },
+  "homepage": "https://github.com/CareerHub/Javascript-Api-Example#readme",
+  "dependencies": {
+    "local-web-server": "^1.2.6"
+  }
+}

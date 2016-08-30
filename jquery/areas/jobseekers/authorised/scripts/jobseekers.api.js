@@ -56,17 +56,24 @@
 				return getResource('jobs', 'GET', options);
 			},
 			search: function(text, take, skip) {
-				
+
 				var options = {
 					text: text,
 					take: take,
 					skip: skip
 				};
-				
+
 				return getResource('jobs/search', 'GET', options);
 			},
 			get: function(id) {
 				return getResource('jobs/' + id, 'GET');
+			}
+		},
+		formReports: {
+			get: function(formId, id) {
+				if(!id) id = 'default';
+				return getResource('forms/' + formId + '/reports/' + id, 'GET');
+
 			}
 		}
 	};

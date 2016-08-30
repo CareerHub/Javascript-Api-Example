@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 </head>
 <body>
 	<h1>CareerHub Javascript Examples</h1>
@@ -12,7 +14,7 @@
 	<script id="event-list-item-template" type="x-tmpl-mustache">
 		{{#events}}
 		<div class="event-list-item">
-			<h4><a href="/event.html#{{id}}">{{title}}</a></h4>
+			<h4><a href="events.html#{{id}}">{{title}}</a></h4>
 			<p>
 				<strong>Venue: </strong> {{venue}}<br />
 				<strong>Dates</strong>
@@ -25,6 +27,13 @@
 			<p>{{summary}}</p>
 			<h5>Details</h5>
 			<p>{{&details}}</p>
+			<div>
+				<h5>Contact Details</h5>
+				<p>
+					<strong>Email:</strong> {{email}}<br />
+					<strong>Phone:</strong> {{phone}}
+				</p>
+			</div>
 		</div>
 		{{/events}}
 	</script>
